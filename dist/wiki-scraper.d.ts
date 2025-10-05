@@ -1,0 +1,35 @@
+import { Function, Realm, ClassField, Class, Panel, WikiPage, Type, Enum, Struct } from "./types.js";
+import { WikiApiClient } from "./wiki-api-client.js";
+export declare class WikiScraper {
+    private wikiApiClient;
+    private static readonly limit;
+    private readonly progressBar;
+    constructor(wikiApiClient: WikiApiClient);
+    getGlobalFunctions(): Promise<Array<Function>>;
+    getClasses(): Promise<Array<Class>>;
+    getLibraries(): Promise<Array<Class>>;
+    getHooks(): Promise<Array<Class>>;
+    getPanels(): Promise<Array<Class>>;
+    getEnums(): Promise<Array<Enum>>;
+    getStructs(): Promise<Array<Struct>>;
+    getPagesInCategory(category: string, filter?: string): Promise<Array<string>>;
+    buildClasses(wikiPages: Array<WikiPage>): Array<Class>;
+    parseFieldPage(pageContent: string): ClassField;
+    parseFunctionPage(pageContent: string): Function;
+    private parseSourceFile;
+    parsePanelPage(pageContent: string): Panel;
+    parseTypePage(pageContent: string): Type;
+    parseEnumPage(pageContent: string): Enum;
+    parseStructPage(pageContent: string): Struct;
+    parseRealms(realmsRaw: string): Array<Realm>;
+    isPanelPage(pageContent: string): boolean;
+    isClassFieldPage(pageContent: string): boolean;
+    isFunctionPage(pageContent: string): boolean;
+    isTypePage(pageContent: string): boolean;
+    isEnumPage(pageContent: string): boolean;
+    isStructPage(pageContent: string): boolean;
+    private parseFunctionArguments;
+    private parseContent;
+    private isValidDescription;
+    private trimMultiLineString;
+}
